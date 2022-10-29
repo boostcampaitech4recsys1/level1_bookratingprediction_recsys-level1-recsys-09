@@ -10,19 +10,24 @@ from src.data import image_data_load, image_data_split, image_data_loader
 from src.data import text_data_load, text_data_split, text_data_loader
 
 from src import FactorizationMachineModel, FieldAwareFactorizationMachineModel
-from src import NeuralCollaborativeFiltering, WideAndDeepModel, DeepCrossNetworkModel
+from src import NeuralCollaborativeFiltering, WideAndDeepModel, DeepCrossNetworkModel, DeepFMMachineModel
 from src import CNN_FM
 from src import DeepCoNN
 
+import wandb
+
 
 def main(args):
+    config={"epochs": args.EPOCHS, "batch_size": args.BATCH_SIZE, "learning_rate" : args.LR}
+    wandb.init(project="competition1", config=config)
+    wandb.run.name = f'{args.MODEL}'
     seed_everything(args.SEED)
 
     ######################## DATA LOAD
     print(f'--------------- {args.MODEL} Load Data ---------------')
     if args.MODEL in ('FM', 'FFM'):
         data = context_data_load(args)
-    elif args.MODEL in ('NCF', 'WDN', 'DCN'):
+    elif args.MODEL in ('NCF', 'WDN', 'DCN', 'DEEPFM'):
         data = dl_data_load(args)
     elif args.MODEL == 'CNN_FM':
         data = image_data_load(args)
@@ -39,7 +44,7 @@ def main(args):
         data = context_data_split(args, data)
         data = context_data_loader(args, data)
 
-    elif args.MODEL in ('NCF', 'WDN', 'DCN'):
+    elif args.MODEL in ('NCF', 'WDN', 'DCN', 'DEEPFM'):
         data = dl_data_split(args, data)
         data = dl_data_loader(args, data)
 
@@ -59,6 +64,8 @@ def main(args):
         model = FactorizationMachineModel(args, data)
     elif args.MODEL=='FFM':
         model = FieldAwareFactorizationMachineModel(args, data)
+    elif args.MODEL=='DEEPFM':
+        model = DeepFMMachineModel(args, data)        
     elif args.MODEL=='NCF':
         model = NeuralCollaborativeFiltering(args, data)
     elif args.MODEL=='WDN':
@@ -78,7 +85,7 @@ def main(args):
 
     ######################## INFERENCE
     print(f'--------------- {args.MODEL} PREDICT ---------------')
-    if args.MODEL in ('FM', 'FFM', 'NCF', 'WDN', 'DCN'):
+    if args.MODEL in ('FM', 'FFM', 'NCF', 'WDN', 'DCN', 'DEEPFM'):
         predicts = model.predict(data['test_dataloader'])
     elif args.MODEL=='CNN_FM':
         predicts  = model.predict(data['test_dataloader'])
@@ -90,7 +97,7 @@ def main(args):
     ######################## SAVE PREDICT
     print(f'--------------- SAVE {args.MODEL} PREDICT ---------------')
     submission = pd.read_csv(args.DATA_PATH + 'sample_submission.csv')
-    if args.MODEL in ('FM', 'FFM', 'NCF', 'WDN', 'DCN', 'CNN_FM', 'DeepCoNN'):
+    if args.MODEL in ('FM', 'FFM', 'NCF', 'WDN', 'DCN', 'CNN_FM', 'DeepCoNN', 'DEEPFM'):
         submission['rating'] = predicts
     else:
         pass
@@ -111,7 +118,7 @@ if __name__ == "__main__":
 
     ############### BASIC OPTION
     arg('--DATA_PATH', type=str, default='data/', help='Data path를 설정할 수 있습니다.')
-    arg('--MODEL', type=str, choices=['FM', 'FFM', 'NCF', 'WDN', 'DCN', 'CNN_FM', 'DeepCoNN'],
+    arg('--MODEL', type=str, choices=['FM', 'FFM', 'NCF', 'WDN', 'DCN', 'CNN_FM', 'DeepCoNN', 'DEEPFM'],
                                 help='학습 및 예측할 모델을 선택할 수 있습니다.')
     arg('--DATA_SHUFFLE', type=bool, default=True, help='데이터 셔플 여부를 조정할 수 있습니다.')
     arg('--TEST_SIZE', type=float, default=0.2, help='Train/Valid split 비율을 조정할 수 있습니다.')
@@ -131,6 +138,9 @@ if __name__ == "__main__":
 
     ############### FFM
     arg('--FFM_EMBED_DIM', type=int, default=16, help='FFM에서 embedding시킬 차원을 조정할 수 있습니다.')
+    
+    ############### DEEPFM
+    arg('--DEEPFM_EMBED_DIM', type=int, default=16, help='DEEPFM에서 embedding시킬 차원을 조정할 수 있습니다.')    
 
     ############### NCF
     arg('--NCF_EMBED_DIM', type=int, default=16, help='NCF에서 embedding시킬 차원을 조정할 수 있습니다.')

@@ -3,6 +3,7 @@ import numpy as np
 import tqdm
 import torch
 import torch.nn as nn
+import wandb
 from ._models import RMSELoss, FeaturesEmbedding, FactorizationMachine_v
 
 
@@ -129,6 +130,7 @@ class DeepCoNN:
             else:
                 loss_list.append([epoch, total_loss/n, val_total_loss/val_n, 'None'])
             tk0.set_postfix(train_loss=total_loss/n, valid_loss=val_total_loss/val_n)
+            wandb.log({'rmse_score': loss, 'total_loss': val_total_loss/val_n})
 
 
     def predict(self, test_data_loader):
