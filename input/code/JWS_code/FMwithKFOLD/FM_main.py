@@ -25,19 +25,20 @@ def seed_everything(seed):
     torch.cuda.manual_seed(seed)
     torch.backends.cudnn.deterministic = True
 
-
+predicts_list = []
 def main():
     seed_everything(9)
     data = data_processing(train,test,sub,book,user)
-    model = FactorizationMachineModel(data)
     for i in range(5):
+        model = FactorizationMachineModel(data)
         data = stratified_kfold(data,i)
         data = context_data_loader(data)
-        model.train(data)
-        print('==={}_valid==='.format(i))
 
-    predicts = model.predict(data['test_dataloader'])
-    sub['rating'] = predicts
+        model.train(data)
+        predicts = model.predict(data['test_dataloader'])
+        predicts_list.append(predicts)
+        
+    sub['rating'] = np.mean(predicts_list, axis=0)
 
     now = time.localtime()
     now_date = time.strftime('%Y%m%d', now)

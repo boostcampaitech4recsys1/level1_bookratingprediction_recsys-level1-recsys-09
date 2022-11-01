@@ -15,14 +15,11 @@ class FieldAwareFactorizationMachineModel:
         super().__init__()
 
         self.criterion = RMSELoss()
-
-        self.train_dataloader = data['train_dataloader']
-        self.valid_dataloader = data['valid_dataloader']
         self.field_dims = data['field_dim']
 
-        self.embed_dim = 64
-        self.epochs = 20
-        self.learning_rate = 1e-4
+        self.embed_dim = 16
+        self.epochs = 5
+        self.learning_rate = 1e-3
         self.weight_decay = 1e-6
         self.log_interval = 100
 
@@ -32,8 +29,9 @@ class FieldAwareFactorizationMachineModel:
         self.optimizer = torch.optim.Adam(params=self.model.parameters(), lr=self.learning_rate, amsgrad=True, weight_decay=self.weight_decay)
 
 
-    def train(self):
-      # model: type, optimizer: torch.optim, train_dataloader: DataLoader, criterion: torch.nn, device: str, log_interval: int=100
+    def train(self, data):
+        self.train_dataloader = data['train_dataloader']
+        self.valid_dataloader = data['valid_dataloader']
         for epoch in range(self.epochs):
             self.model.train()
             total_loss = 0
