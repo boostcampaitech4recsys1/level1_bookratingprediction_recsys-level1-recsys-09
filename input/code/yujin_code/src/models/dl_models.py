@@ -196,7 +196,7 @@ class DeepCrossNetworkModel:
         self.device = args.DEVICE
         self.WANDB = args.WANDB
 
-        self.mlp_dims = [args.DCN_MLP_DIMS_0, args.DCN_MLP_DIMS_1]
+        self.mlp_dims = [args.DCN_MLP_DIMS] *2
         self.dropout = args.DCN_DROPOUT
         self.num_layers = args.DCN_NUM_LAYERS
 
