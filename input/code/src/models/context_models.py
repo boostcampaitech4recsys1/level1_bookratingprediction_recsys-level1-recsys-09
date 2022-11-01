@@ -16,7 +16,8 @@ class FactorizationMachineModel:
 
     def __init__(self, args, data):
         super().__init__()
-
+        
+        self.args = args
         self.criterion = RMSELoss()
 
         self.train_dataloader = data['train_dataloader']
@@ -57,7 +58,7 @@ class FactorizationMachineModel:
 
             rmse_score = self.predict_train()
             print('epoch:', epoch, 'validation: rmse:', rmse_score)
-            wandb.log({'rmse_score': rmse_score, 'total_loss': total_loss})
+            ({'rmse_score': rmse_score, 'total_loss': total_loss})
 
 
 
@@ -89,6 +90,7 @@ class FieldAwareFactorizationMachineModel:
     def __init__(self, args, data):
         super().__init__()
 
+        self.args = args
         self.criterion = RMSELoss()
 
         self.train_dataloader = data['train_dataloader']
@@ -127,7 +129,8 @@ class FieldAwareFactorizationMachineModel:
 
             rmse_score = self.predict_train()
             print('epoch:', epoch, 'validation: rmse:', rmse_score)
-            wandb.log({'rmse_score': rmse_score, 'total_loss': total_loss})
+            if self.args.WANDB:
+                wandb.log({'rmse_score': rmse_score, 'total_loss': total_loss})
 
 
     def predict_train(self):

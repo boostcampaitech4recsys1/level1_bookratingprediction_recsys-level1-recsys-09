@@ -68,6 +68,7 @@ class _DeepCoNN(nn.Module):
 class DeepCoNN:
     def __init__(self, args, data):
         super(DeepCoNN, self).__init__()
+        self.args = args
         self.device = args.DEVICE
         self.model = _DeepCoNN(
                                 np.array([len(data['user2idx']), len(data['isbn2idx'])], dtype=np.uint32),
@@ -130,7 +131,8 @@ class DeepCoNN:
             else:
                 loss_list.append([epoch, total_loss/n, val_total_loss/val_n, 'None'])
             tk0.set_postfix(train_loss=total_loss/n, valid_loss=val_total_loss/val_n)
-            wandb.log({'rmse_score': loss, 'total_loss': val_total_loss/val_n})
+            if self.args.WANDB:
+                wandb.log({'rmse_score': total_loss/n, 'total_loss': val_total_loss/val_n})
 
 
     def predict(self, test_data_loader):

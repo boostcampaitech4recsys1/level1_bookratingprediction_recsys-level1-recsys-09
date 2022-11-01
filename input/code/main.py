@@ -15,12 +15,22 @@ from src import CNN_FM
 from src import DeepCoNN
 
 import wandb
-
+def str2bool(v):
+    if isinstance(v, bool):
+        return v
+    if v.lower() in ('yes', 'true', 't', 'y', '1'):
+        return True
+    elif v.lower() in ('no', 'false', 'f', 'n', '0'):
+        return False
+    else:
+        raise argparse.ArgumentTypeError('Boolean value expected.')
+    
 
 def main(args):
-    config={"epochs": args.EPOCHS, "batch_size": args.BATCH_SIZE, "learning_rate" : args.LR}
-    wandb.init(project="competition1", config=config)
-    wandb.run.name = f'{args.MODEL}'
+    if args.WANDB:
+        config={"epochs": args.EPOCHS, "batch_size": args.BATCH_SIZE, "learning_rate" : args.LR}
+        wandb.init(project="competition1", config=config, reinit=True)
+        wandb.run.name = f'JSY_{args.MODEL}'
     seed_everything(args.SEED)
 
     ######################## DATA LOAD
@@ -120,9 +130,11 @@ if __name__ == "__main__":
     arg('--DATA_PATH', type=str, default='data/', help='Data path를 설정할 수 있습니다.')
     arg('--MODEL', type=str, choices=['FM', 'FFM', 'NCF', 'WDN', 'DCN', 'CNN_FM', 'DeepCoNN', 'DEEPFM'],
                                 help='학습 및 예측할 모델을 선택할 수 있습니다.')
-    arg('--DATA_SHUFFLE', type=bool, default=True, help='데이터 셔플 여부를 조정할 수 있습니다.')
+    arg('--DATA_SHUFFLE', type=str2bool, default=True, help='데이터 셔플 여부를 조정할 수 있습니다.')
     arg('--TEST_SIZE', type=float, default=0.2, help='Train/Valid split 비율을 조정할 수 있습니다.')
     arg('--SEED', type=int, default=42, help='seed 값을 조정할 수 있습니다.')
+    
+    arg('--WANDB', type=str2bool, default=True, help='WANDB에 기록 여부를 조정할 수 있습니다.')
     
     ############### TRAINING OPTION
     arg('--BATCH_SIZE', type=int, default=1024, help='Batch size를 조정할 수 있습니다.')
@@ -139,8 +151,12 @@ if __name__ == "__main__":
     ############### FFM
     arg('--FFM_EMBED_DIM', type=int, default=16, help='FFM에서 embedding시킬 차원을 조정할 수 있습니다.')
     
+    
     ############### DEEPFM
     arg('--DEEPFM_EMBED_DIM', type=int, default=16, help='DEEPFM에서 embedding시킬 차원을 조정할 수 있습니다.')    
+    arg('--DEEPFM_MLP_DIMS', type=list, default=(16, 16), help='DEEPFM에서 MLP Network의 차원을 조정할 수 있습니다.')
+    arg('--DEEPFM_DROPOUT', type=float, default=0.2, help='DEEPFM에서 Dropout rate를 조정할 수 있습니다.')    
+
 
     ############### NCF
     arg('--NCF_EMBED_DIM', type=int, default=16, help='NCF에서 embedding시킬 차원을 조정할 수 있습니다.')
@@ -173,3 +189,4 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     main(args)
+    

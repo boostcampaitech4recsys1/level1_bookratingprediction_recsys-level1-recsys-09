@@ -15,7 +15,8 @@ class NeuralCollaborativeFiltering:
 
     def __init__(self, args, data):
         super().__init__()
-
+        
+        self.args = args
         self.criterion = RMSELoss()
 
         self.train_dataloader = data['train_dataloader']
@@ -60,7 +61,8 @@ class NeuralCollaborativeFiltering:
 
             rmse_score = self.predict_train()
             print('epoch:', epoch, 'validation: rmse:', rmse_score)
-            wandb.log({'rmse_score': rmse_score, 'total_loss': total_loss})
+            if self.args.WANDB:
+                wandb.log({'rmse_score': rmse_score, 'total_loss': total_loss})
 
 
     def predict_train(self):
@@ -91,6 +93,7 @@ class WideAndDeepModel:
     def __init__(self, args, data):
         super().__init__()
 
+        self.args = args
         self.criterion = RMSELoss()
 
         self.train_dataloader = data['train_dataloader']
@@ -132,7 +135,8 @@ class WideAndDeepModel:
 
             rmse_score = self.predict_train()
             print('epoch:', epoch, 'validation: rmse:', rmse_score)
-            wandb.log({'rmse_score': rmse_score, 'total_loss': total_loss})
+            if self.args.WANDB:
+                wandb.log({'rmse_score': rmse_score, 'total_loss': total_loss})
 
 
     def predict_train(self):
@@ -163,6 +167,7 @@ class DeepCrossNetworkModel:
     def __init__(self, args, data):
         super().__init__()
 
+        self.args = args
         self.criterion = RMSELoss()
 
         self.train_dataloader = data['train_dataloader']
@@ -205,7 +210,8 @@ class DeepCrossNetworkModel:
 
             rmse_score = self.predict_train()
             print('epoch:', epoch, 'validation: rmse:', rmse_score)
-            wandb.log({'rmse_score': rmse_score, 'total_loss': total_loss})
+            if self.args.WANDB:
+                wandb.log({'rmse_score': rmse_score, 'total_loss': total_loss})
 
 
     def predict_train(self):
@@ -237,6 +243,7 @@ class DeepFMMachineModel:
     def __init__(self, args, data):
         super().__init__()
 
+        self.args = args
         self.criterion = RMSELoss()
 
         self.train_dataloader = data['train_dataloader']
@@ -275,7 +282,8 @@ class DeepFMMachineModel:
 
             rmse_score = self.predict_train()
             print('epoch:', epoch, 'validation: rmse:', rmse_score)
-            wandb.log({'rmse_score': rmse_score, 'total_loss': total_loss})
+            if self.args.WANDB:
+                wandb.log({'rmse_score': rmse_score, 'total_loss': total_loss})
 
             
     def predict_train(self):
