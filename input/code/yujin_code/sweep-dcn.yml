@@ -1,0 +1,35 @@
+project: baselineTest
+program: main_wandb.py
+method: bayes
+metric:
+  goal: minimize
+  name: rmse
+parameters:
+  MODEL : 
+    value : DCN
+  LR:
+    values : [0.1, 0.05, 0.01, 0.005, 0.001]
+  EPOCHS: 
+    min : 5
+    max : 100 
+    distribution: int_uniform
+  BATCH_SIZE : 
+    values : [16, 32]
+
+  NCF_DROPOUT : 
+    min : 0.1
+    max : 0.4
+    distribution: uniform
+
+  DCN_EMBED_DIM:
+    values : [4, 8, 16, 32, 64, 128]
+  DCN_MLP_DIMS_0: 
+    values : [16, 32, 64] 
+  DCN_MLP_DIMS_1: 
+    values : [16, 32, 64] 
+  DCN_DROPOUT: 
+    min : 0.1
+    max : 0.4
+    distribution: uniform
+  DCN_NUM_LAYERS: 
+    values : [2, 3, 4, 5] 
