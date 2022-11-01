@@ -1,7 +1,7 @@
 import tqdm
 
 import numpy as np
-
+import wandb
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -58,6 +58,7 @@ class NeuralCollaborativeFiltering:
 
             rmse_score = self.predict_train()
             print('epoch:', epoch, 'validation: rmse:', rmse_score)
+            wandb.log({'rmse_score':rmse_score,'total_loss':total_loss})
 
 
     def predict_train(self):

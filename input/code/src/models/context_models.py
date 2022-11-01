@@ -5,6 +5,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.optim as optim
+import wandb
 
 from ._models import _FactorizationMachineModel, _FieldAwareFactorizationMachineModel
 from ._models import rmse, RMSELoss
@@ -55,7 +56,7 @@ class FactorizationMachineModel:
 
             rmse_score = self.predict_train()
             print('epoch:', epoch, 'validation: rmse:', rmse_score)
-
+            wandb.log({'rmse_score':rmse_score,'total_loss':total_loss})
 
 
     def predict_train(self):
@@ -124,7 +125,7 @@ class FieldAwareFactorizationMachineModel:
 
             rmse_score = self.predict_train()
             print('epoch:', epoch, 'validation: rmse:', rmse_score)
-
+            wandb.log({'rmse_score':rmse_score,'total_loss':total_loss})
 
     def predict_train(self):
         self.model.eval()

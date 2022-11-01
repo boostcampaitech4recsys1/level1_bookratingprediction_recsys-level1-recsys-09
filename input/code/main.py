@@ -1,7 +1,7 @@
 import time
 import argparse
 import pandas as pd
-
+import wandb
 from src import seed_everything
 
 from src.data import context_data_load, context_data_split, context_data_loader
@@ -16,6 +16,9 @@ from src import DeepCoNN
 
 
 def main(args):
+    config={"epochs":args.EPOCHS,"batch_size":args.BATCH_SIZE,"learning_rate":args.LR}
+    wandb.init(project="competition1",config=config)
+    wandb.run.name=f'{args.MODEL}'
     seed_everything(args.SEED)
 
     ######################## DATA LOAD

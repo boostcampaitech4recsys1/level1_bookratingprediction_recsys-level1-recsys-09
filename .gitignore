@@ -7,11 +7,14 @@
 .nv
 .vscode-server
 ./input/code/data
+notebook
+nltk_data
 **/.pyc
 **/.ipynb_checkpoints
 input/code/data
 input/code/images
 input/code/submit
+input/code/wandb
 input/code/models/GoogleNews-vectors-negative300.bin.gz
 Untitled.ipynb
 .git
@@ -22,3 +25,4 @@ Untitled.ipynb
 .python_history
 .viminfo
 .wget-hsts
+.netrc
