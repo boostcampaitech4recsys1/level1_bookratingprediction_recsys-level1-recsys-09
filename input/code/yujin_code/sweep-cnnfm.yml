@@ -1,3 +1,4 @@
+project: baselineTest
 program: main_wandb.py
 method: bayes
 metric:

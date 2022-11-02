@@ -1,3 +1,4 @@
+project: baselineTest
 program: main_wandb.py
 method: bayes
 metric:
@@ -15,21 +16,21 @@ parameters:
   BATCH_SIZE : 
     values : [16, 32]
 
-  DEEPCONN_EMBED_DIM:
-    values : [4, 8, 16, 32, 64, 128]
-  DEEPCONN_LATENT_DIM:
-    values : [25, 50, 100, 150, 200]
-    # [4, 8, 16, 32, 64, 128]
-  DEEPCONN_CONV_1D_OUT_DIM:
-    min : 20
-    max : 80 
-    distribution: int_uniform
-  DEEPCONN_KERNEL_SIZE:
-    min : 10
-    max : 300
-    q: 10
-    distribution: int_uniform
-  DEEPCONN_WORD_DIM:
-    values : [300, 512, 768, 1024]
-  DEEPCONN_OUT_DIM:
-    values : [8, 16, 32, 64, 128]
+  # DEEPCONN_EMBED_DIM:
+  #   values : [4, 8, 16, 32, 64, 128]
+  # DEEPCONN_LATENT_DIM:
+  #   values : [25, 50, 100, 150, 200]
+  #   # [4, 8, 16, 32, 64, 128]
+  # DEEPCONN_CONV_1D_OUT_DIM:
+  #   min : 20
+  #   max : 80 
+  #   distribution: int_uniform
+  # DEEPCONN_KERNEL_SIZE:
+  #   min : 10
+  #   max : 300
+  #   q: 10
+  #   distribution: q_uniform
+  # DEEPCONN_WORD_DIM:
+  #   values : [300, 512, 768, 1024]
+  # DEEPCONN_OUT_DIM:
+  #   values : [8, 16, 32, 64, 128]

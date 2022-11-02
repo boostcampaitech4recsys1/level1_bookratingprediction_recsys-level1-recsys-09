@@ -161,5 +161,7 @@ if __name__ == "__main__":
     arg('--DEEPCONN_WORD_DIM', type=int, default=768, help='DEEP_CONN에서 1D conv의 입력 크기를 조정할 수 있습니다.')
     arg('--DEEPCONN_OUT_DIM', type=int, default=32, help='DEEP_CONN에서 1D conv의 출력 크기를 조정할 수 있습니다.')
 
+    arg('--WANDB', type=bool, default=False, help='WANDB에 기록 여부를 조정할 수 있습니다.')
+
     args = parser.parse_args()
     main(args)
