@@ -1,4 +1,4 @@
-# 9해조 
+# 9️⃣ Naver Boostcamp Ai Tech 4th recys 9th 
 <div align="center">
  
 ![196146474-e10f4661-1174-49d1-8395-f6aaf908ad94](https://user-images.githubusercontent.com/46878756/200162322-8b15ce9a-1bc3-4340-ac39-d68373d1b43f.png)
@@ -24,12 +24,17 @@
 
 ![LELE](https://user-images.githubusercontent.com/46878756/200163414-7b5976fe-4601-46f4-80b1-08b1252c0e1f.png)
 
-##  Improve Model Performance
+## 🔍 Improve Model Performance
+### Data Preprocessing
 
-## Models
+### Validation
 
-## Ensemble
+### Hyperparameter Tuning
 
-## Project Template
-## Result
+## 📈 Models
+
+## 🧪 Ensemble
+
+## ⚙ Project Template
+## 🖥 Result
 - public 5위, private 5위
