@@ -13,18 +13,23 @@
 | :--------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------: 
 |                          [권은채](https://github.com/dmscornjs)                           |                            [김유진](https://github.com/hello-im-yj)                             |                        [장윤성](https://github.com/choimyungbin)                           |
 
-| [<img src="https://avatars.githubusercontent.com/u/53855943?v=4" width="100px">](https://github.com/oyoungsun) | [<img src="https://avatars.githubusercontent.com/u/75313644?v=4" width="100px">](https://github.com/dnjstka0307) |
+| [<img src="https://avatars.githubusercontent.com/u/53855943?v=4" width="100px">](https://github.com/jq3219) | [<img src="https://avatars.githubusercontent.com/u/75313644?v=4" width="100px">](https://github.com/dnjstka0307) |
 | :--------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------: |
 |                          [정승연](https://github.com/jq3219)                           |                            [조원삼](https://github.com/dnjstka0307)  
 
-## Summary
+## 🗃 Project Procedure 
+
+## 📊 Summary
 - 다양한 모델중에 적합한 모델들을 선택한 후, 단일 모델의 성능을 최대화 한 이후에 모델들의 가중치를 다르게 주어 Ensemble을 진행 
 
 ![LELE](https://user-images.githubusercontent.com/46878756/200163414-7b5976fe-4601-46f4-80b1-08b1252c0e1f.png)
 
-## Validation
+##  Improve Model Performance
 
 ## Models
 
+## Ensemble
+
+## Project Template
 ## Result
 - public 5위, private 5위
