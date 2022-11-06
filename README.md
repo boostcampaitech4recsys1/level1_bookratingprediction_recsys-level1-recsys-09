@@ -28,7 +28,8 @@
 ### Hyperparameter Tuning
 
 ## 📈 Models
-![image](https://user-images.githubusercontent.com/46878756/200168233-39c26930-cf1b-41e5-8bac-646f45f5d026.png)
+![image](https://user-images.githubusercontent.com/46878756/200172239-17cab3be-a2fb-45ee-96e4-d554f37bd7b2.png)
+
 
 ## 🧪 Ensemble
 
