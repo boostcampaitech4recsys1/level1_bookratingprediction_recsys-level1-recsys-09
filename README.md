@@ -19,6 +19,7 @@
 
 ## Summary
 - 다양한 모델중에 적합한 모델들을 선택한 후, 단일 모델의 성능을 최대화 한 이후에 모델들의 가중치를 다르게 주어 Ensemble을 진행 
+
 ![LELE](https://user-images.githubusercontent.com/46878756/200163414-7b5976fe-4601-46f4-80b1-08b1252c0e1f.png)
 
 ## Validation
