@@ -36,5 +36,6 @@
 ## 🧪 Ensemble
 
 ## ⚙ Project Template
-## 🖥 Result
-- public 5위, private 5위
+## 🖥 Result - public 5위, private 5위
+![image](https://user-images.githubusercontent.com/46878756/200167215-a35596fe-e01e-4458-9ecb-505b6e52d5f1.png)
+
